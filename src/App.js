@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import WeatherDisplay from "./WeatherDisplay";
+
+
+class App extends React.Component{
+
+  
+  constructor(props){
+    super(props);
+  
+
+    this.state = {lat: null, errrorMessage: ''};
+
+    navigator.geolocation.getCurrentPosition(position => {
+      this.setState({lat: position.coords.latitude})
+      console.log(this.state.lat);
+    }, err => {
+      this.setState({errrorMessage: err.message})
+    });
+
+  }
+  
+  render() {
+    
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <WeatherDisplay />
+      <h1>Hello Abdul Rehman</h1>
+      <div>
+        Latitude: {this.state.lat}
+        <br />
+        Error: {this.state.errrorMessage}
+      </div>
+
     </div>
   );
+}
+
+
+
+
 }
 
 export default App;
