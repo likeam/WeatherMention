@@ -31,8 +31,6 @@ class App extends React.Component{
       <h1>Hello Abdul Rehman</h1>
       <div>
         Latitude: {this.state.lat}
-        <br />
-        Error: {this.state.errrorMessage}
       </div>
 
     </div>
