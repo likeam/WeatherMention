@@ -1,31 +1,25 @@
 import React from "react";
-
 import WeatherDisplay from "./WeatherDisplay";
 
 
 class App extends React.Component{
-
   
   constructor(props){
-    super(props);
-  
+    super(props); 
 
     this.state = {lat: null, errrorMessage: ''};
 
     navigator.geolocation.getCurrentPosition(position => {
       this.setState({lat: position.coords.latitude})
-      console.log(this.state.lat);
     }, err => {
       this.setState({errrorMessage: err.message})
     });
-
   }
   
-  render() {
-    
-
   
-  return (
+  render() { 
+
+    return (
     <div>
       <WeatherDisplay />
       <h1>Hello Abdul Rehman</h1>
@@ -36,9 +30,6 @@ class App extends React.Component{
     </div>
   );
 }
-
-
-
 
 }
 
