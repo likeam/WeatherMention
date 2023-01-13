@@ -4,32 +4,31 @@ import WeatherDisplay from "./WeatherDisplay";
 
 class App extends React.Component{
   
-  constructor(props){
-    super(props); 
+  state = {lat: null, errrorMessage: ''};
+  
 
-    this.state = {lat: null, errrorMessage: ''};
-
-    navigator.geolocation.getCurrentPosition(position => {
-      this.setState({lat: position.coords.latitude})
-    }, err => {
-      this.setState({errrorMessage: err.message})
-    });
+  componentDidMount(){
+    navigator.geolocation.getCurrentPosition(position => this.setState({lat: position.coords.latitude}), err =>  this.setState({errrorMessage: err.message}));
   }
   
   
   render() { 
 
-    return (
-    <div>
-      <WeatherDisplay />
-      <h1>Hello Abdul Rehman</h1>
-      <div>
-        Latitude: {this.state.lat}
-      </div>
 
-    </div>
-  );
-}
+    if(this.state.errrorMessage && !this.state.lat){
+      return <div>Erorr : {this.state.lat}</div>
+    }
+
+    if(!this.state.errrorMessage && this.state.lat){
+      return <div>
+      <div><WeatherDisplay lat={this.state.lat} /></div>
+      <div> Latiude : {this.state.lat}</div>
+      </div>
+    }
+
+    return <div>LOADING!</div>
+    
+  }
 
 }
 
